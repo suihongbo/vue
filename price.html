@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        h1{
+            text-align: center;
+        }
+        #app li{
+            width: 400px;
+            height: 60px;
+            background: #0f0;
+            line-height: 60px;
+            margin: 10px auto;
+            padding: 10px;
+        }
+        #val{
+            float: right;
+        }
+        #line{
+            height: 1px;
+            width: 500px;
+            background: #bbb;
+            margin: 20px auto;
+            display: block;
+        }
+        #total{
+            width: 500px;
+            height: 80px;
+            margin: 0 auto;
+        }
+        #total span{
+            float: right;
+        }
+        #app .red{
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>services</h2>
+        <ul>
+            <li @click="fn(obj)" :class="{red:obj.isRed}" 
+            v-for="obj in arr" >{{obj.name}}
+                <span id="val">{{obj.price}}</span>
+            </li>
+        </ul>
+        <span id="line"></span>
+        <div id="total">total:
+            <span>{{num}}</span>
+        </div>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                arr:[
+                    {name:'aaa',price:'111',isRed:false},
+                    {name:'bbb',price:'333.5 ',isRed:false},
+                    {name:'ccc',price:'666.5',isRed:false},
+                    {name:'ddd',price:'888.5',isRed:false},
+                    {name:'eee',price:'999.5',isRed:false},
+                    {name:'fff',price:'777',isRed:false}                                                            
+                ],
+                num:0
+            },
+            methods:{
+                fn:function(o){
+                    // console.log(this);
+                    o.isRed = !o.isRed;
+                    if(o.isRed){
+                        this.num += parseFloat(o.price);                        
+                    }else{
+                        this.num -= parseFloat(o.price);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
